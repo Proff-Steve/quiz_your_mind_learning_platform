@@ -1,0 +1,13 @@
+Stem:
+
+A 72-year-old man with chronic kidney disease stage 3 (eGFR 45 mL/min) and type 2 diabetes (on metformin and glipizide) presents with acute onset of confusion, nausea, and generalized weakness. He reports completing a 5-day course of ibuprofen for knee pain three days ago. Medications also include lisinopril and atorvastatin. Vital signs: BP 100/65 mmHg, HR 105 bpm, afebrile. Labs: sodium 135 mEq/L, potassium 6.8 mEq/L, chloride 100 mEq/L, bicarbonate 14 mEq/L, glucose 210 mg/dL, BUN 85 mg/dL (baseline 25), creatinine 4.2 mg/dL (baseline 1.3), lactate 2.5 mmol/L. Arterial blood gas: pH 7.25, pCO₂ 30 mmHg, pO₂ 90 mmHg. Urinalysis shows no red blood cells or casts. Which of the following best explains the primary mechanism of this patient's acute kidney injury and the most appropriate immediate treatment?
+
+Options:
+
+Option A: The patient has type 4 renal tubular acidosis (hyporeninemic hypoaldosteronism) from his diabetic nephropathy, unmasked by lisinopril-induced reduction in angiotensin II. Hyperkalemia impairs ammonium excretion, worsening the non-anion gap metabolic acidosis. The immediate treatment is intravenous calcium gluconate for cardiac membrane stabilization, followed by insulin-dextrose and kayexalate.
+
+Option B: Ibuprofen caused acute interstitial nephritis (AIN), which typically presents with fever, rash, eosinophilia, and sterile pyuria. The absence of these findings makes AIN unlikely. Instead, the patient has prerenal azotemia from NSAID-induced reduction in renal prostaglandins, superimposed on chronic kidney disease. This caused decreased renal perfusion leading to ischemic acute tubular necrosis (ATN), evidenced by muddy brown casts (though not yet visible). The immediate treatment is aggressive intravenous fluid resuscitation.
+
+Option C: The combination of lisinopril and ibuprofen in a diabetic patient with baseline CKD precipitated a classic "triple whammy": ACE inhibitor-induced efferent arteriolar vasodilation plus NSAID-induced afferent arteriolar vasoconstriction plus diuretic-induced volume contraction. This causes a precipitous drop in glomerular filtration pressure without frank obstruction or inflammation. The immediate treatment is discontinuation of NSAIDs and ACE inhibitors with cautious intravenous fluid administration.
+
+Option D: Metformin accumulation due to acute kidney injury has led to lactic acidosis, explaining the elevated lactate and low bicarbonate. The hyperkalemia is from the underlying CKD and tissue breakdown. The immediate treatment is intravenous sodium bicarbonate to correct acidosis, followed by emergent hemodialysis to remove metformin and normalize electrolytes.

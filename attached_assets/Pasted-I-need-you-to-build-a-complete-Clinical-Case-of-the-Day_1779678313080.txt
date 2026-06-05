@@ -1,0 +1,99 @@
+I need you to build a complete "Clinical Case of the Day" feature for my web app. Here's exactly what I need:
+
+## Overview
+Create "Attempt Problem of The Day" on the dashboard
+Add a section under "Attempt Problem of The Day" on the user dashboard called "Clinical Case of the Day". Users click it to see a clinical case with questions and answer boxes.
+
+## Core Requirements
+
+### Daily Case System
+- Admin can create clinical cases with: case content (text), multiple questions, correct answers for each question, and rationale for each answer
+- Each case is assigned to a specific date (one case per day)
+- System automatically shows today's case to users
+
+### User Flow
+1. User clicks "Clinical Case of the Day" from dashboard
+2. They see the case scenario and questions
+3. Each question has a text box underneath for their answer
+4. They submit their answers
+5. System automatically marks their answers against correct answers (case-insensitive, trim whitespace)
+6. They immediately see:
+   - Their score (percentage)
+   - Correct answer for each question
+   - Rationale/explanation for each correct answer
+7. They DO NOT see other users' scores at this point
+
+### Anti-Copy/Paste Restrictions
+- Users CANNOT copy ANY text from the case page (disable copy event)
+- Users CANNOT paste text into answer boxes (disable paste event)
+- Users CANNOT right-click on the case page
+- CSS: user-select: none on case content area
+
+### Results List (Delayed Leaderboard)
+- A button called "Show Results List" appears after user submits their answers
+- This button is DISABLED/GREYED OUT until 8:00 PM local time (20 hours after case is posted at midnight)
+- At/after 8:00 PM, the button becomes clickable
+- When clicked, it displays:
+  - All users who attempted the case
+  - Their names and scores only
+  - Sorted from highest score to lowest score
+  - NO answers or rationales shown to others
+- This leaderboard is visible to ALL users after 8:00 PM
+
+### Database Tables Needed
+Create tables for:
+1. `clinical_cases`: id, case_date (unique), title, case_content, posted_at (datetime), reveal_results_at (datetime = posted_at + 20 hours)
+2. `case_questions`: id, case_id (foreign key), question_text, correct_answer_text, rationale
+3. `user_case_attempts`: id, user_id, case_id, answers_json (store as JSON), score, submitted_at, is_locked (boolean)
+4. `users`: add any missing fields (assume existing: id, name, email)
+
+Note: Clear case information from the database after 24 hours before reposting a new one
+
+### Business Rules
+- Each user can only attempt a case once (first submission only)
+- No editing after submission
+- Scoring: (number of correct answers / total questions) * 100
+- If user tries to submit after 8:00 PM, show message: "Submission deadline passed"
+- Results list only shows users who submitted BEFORE 8:00 PM
+
+### API Endpoints Needed
+- GET /api/case/today - returns today's case + questions (without correct answers)
+- POST /api/case/submit - accepts answers, scores, stores attempt, returns score + correct answers + rationale
+- GET /api/case/results/:caseId - returns leaderboard (only if current time >= reveal_results_at)
+
+### Frontend Components
+- Dashboard: Add "Clinical Case of the Day" section with [View] button
+- Case Page: Display case, questions, answer boxes (textarea), submit button
+- Results Page/Modal: Show user's score, correct answers, rationale
+- Leaderboard Modal/Component: Show list of names + scores sorted descending
+
+### Timezone Handling
+- Store all times in UTC
+- Admin sets case to post at 12:00 AM local time and reveal at 8:00 PM local time
+- Convert to UTC for storage
+- When displaying "Results available at 8:00 PM", convert to user's local timezone
+
+### Security
+- Backend validation: Check user hasn't submitted before storing answers
+- Unique constraint on (user_id, case_id) for user_case_attempts
+- Time check on server before returning leaderboard data
+- Never expose other users' answers or rationales
+
+### Styling
+- Clean, medical/professional look
+- Responsive design (mobile friendly)
+- Loading states for API calls
+- Error handling with user-friendly messages
+
+
+
+## Deliverables
+Build this feature completely integrated with my existing app. Provide all necessary:
+- Database migrations
+- Backend routes/controllers
+- Frontend components/pages
+- Admin panel for creating cases (or instructions for seeding the database)
+
+Make sure the "Show Results List" button is ONLY clickable after 8:00 PM (20 hours after case posting) and shows the leaderboard as described.
+
+Start by analyzing my current project structure, then implement this feature following existing patterns.

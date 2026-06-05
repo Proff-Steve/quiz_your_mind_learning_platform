@@ -1,0 +1,97 @@
+Generation Rules by Difficulty Level
+EASY MODE
+Generate MCQs using these distractor/format types (mix randomly):
+Negative/Exception-Based (NOT, EXCEPT, LEAST, FALSE)
+Absolute Terms (Always, Never, Only, Must)
+Vague/Qualifier (Usually, Commonly, Rarely, May, Can be)
+Comparative (More likely, Less likely, Most common)
+Causation vs Association (Causes vs Is associated with)
+Time/Sequence (Early vs Late, Acute vs Chronic)
+Double Negatives (Not uncommon, Cannot be excluded)
+Clinical Logic (Best next step, Most appropriate)
+Numerical/Threshold (Above/Below, Elevated vs Severely elevated)
+All/None patterns (All of the above, None of the above)
+Partially True, Close Cousin, Opposite Pair, Cause vs Effect Reversal, Mechanism vs Outcome, Gold Standard vs Practical, Overgeneralization, Outdated, Irrelevant but Correct, Extreme Detail, Numerical Near-Miss, Sequence Mix-Up, Eponym Confusion, Population Mismatch, Risk Factor vs Cause, Exception within Exception, Language Framing, Diagnostic vs Therapeutic, Anchor Bias, Too Good to Be True, Single Wrong Word, Unit Trap, Directionality Error, Context Shift, Stage/Phase, Frequency Illusion, Similar Concept, Same Category Overload, Redundant Option, Hidden Clue, Misleading Keyword, Process/Sequence, Feature Swap, Look-Alike Data, Timing Error, Strength of Relationship, Priority/Order, Overlapping Concepts, Terminology Trap, Pattern Recognition.
+MEDIUM MODE
+30% Easy Mode + 70% of the following formats:
+Classic Combination (Roman numerals I,II,III,IV with options like “I only”, “II & III”)
+True/False for each statement (independent MTF)
+Best Combination (K-type)
+“Which of the following are correct?” (A–E list, pick combination)
+“Select All That Apply” (SATA)
+Assertion–Reason (A-R type)
+Matching Type (EMQ – extended matching)
+Multiple Completion
+Ranking/Ordering
+Matrix Questions
+Cascading/Linked
+Best Answer from Combinations
+Negative Combination (EXCEPT within combination)
+Confidence-Based MTF
+Weighted Combination
+Conditional Combination
+Hierarchical Combination
+Exception Within Combination
+Scenario-Based Combination
+Multi-Step Reasoning Combination
+Data Interpretation Combination
+Cross-Disciplinary Combination
+Analogical Combination
+Cause–Effect Combination
+Completeness-Based Combination
+Redundancy Detection
+Contradiction-Based
+Priority Ranking
+Partial Credit Combination
+Additional constraints for Medium:
+20% of questions have extremely long stems & long options
+If study material is medical/health → 30% of questions are scenario-based
+DIFFICULT MODE
+50% Medium Mode + 50% of advanced types:
+Matrix-Combination Hybrid
+“Best Fit” Combination
+Uncertainty/Inference-Based
+Constraint-Based Combination
+Error Identification Combination
+“Minimum Set” Combination
+“Maximum Set” Combination
+Necessary vs Sufficient
+Mutual Exclusivity
+Hidden Assumption
+Reframed Question
+Boundary Condition Trap
+Counterexample-Based
+Equivalence Trap
+Overlapping Truth Zones
+Signal vs Noise
+Precision-Level Trap
+Definition vs Application Mix
+Symbol/Notation Trap
+Reversal Under Condition
+Composite Statement Trap
+Implicit Comparison
+Default Assumption Trap
+Out-of-Scope Truth
+Repetition with Variation
+Edge-Case Exception
+Competing Correctness
+Implicit Negation
+Perspective Shift
+Cognitive Bias Exploit
+Additional constraints:
+40% of questions have extremely long stems & long options
+If medical/health → 40% scenario-based
+USMLE STANDARD MODE
+50% Difficult Mode + 50% of:
+Uncertainty/Inference-Based (“most likely diagnosis”, “best explanation”)
+Best Fit (Single Best Answer – always one best even if others partially correct)
+Constraint-Based Reasoning (urgency, safety, guidelines)
+Error Identification (indirectly through wrong options)
+Matrix-Combination Hybrid (conceptual, e.g., ECG + lab)
+Single Best Answer (dominant format)
+UCCSMS STANDARD76``
+MODE
+50% Medium Mode + 50% Difficult Mode
+For students from Level 400-600 with index numbers matching SM/SMS/YY/####:
+60% of questions clinical-based (scenarios)
+30% of those have extremely long stems & long options

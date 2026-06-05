@@ -1,0 +1,71 @@
+2. Under the start learning on the dashboard, Add “Create Study Plan” section.
+
+
+
+Take inputs from the student on all the below and use the info provided as a time guide to generate weekly study plan for the student base on uploaded materials in “My materials”.
+
+
+Use dropdown selections and direct entry (where its required) to take these info from the user.
+
+
+After user finish entering, info, Let there be ‘Generate study plan button’, (which triggers the system  to create a study plan base on the uploaded materials in My materials, and present it on the UI like the attached screenshot) and “My materials” buttom in “Create Study Plan”, such that the student can click and will be taken to “My materials” page.
+1. Fixed Weekly Schedule (Non-negotiables)
+These are things you must build around, not interfere with:
+Lectures / Clinicals
+Days + exact time blocks
+ (e.g., Mon–Fri 8 AM–2 PM, or varies?)
+Church / Spiritual Activities
+Services (e.g., Sunday service time)
+Midweek services / prayer meetings
+Personal prayer time (if fixed)
+Classes / Tutorials / Group Discussions
+Any regular academic commitments
+
+2. Semi-Flexible Commitments
+Things that don’t have fixed times but still matter:
+Gym / exercise (if any)
+Leadership roles / meetings
+Fellowship responsibilities
+Side projects
+
+3. Sleep Pattern
+Be honest here, this determines everything:
+What time do you sleep normally?
+What time do you wake up?
+
+
+4. Energy Pattern (Critical for Efficiency)
+Even within your preferred time, I need to know:
+When are you:
+Most focused? (e.g., 7–10 PM)
+Mentally tired?
+Most active?
+Dawn(12am-6am), Morning(6am-12pm), Afternoon(12pm-6pm), Evening (6pm-12am) 
+
+5. Exam Timeline
+When is your next major exam?
+Any block tests before that?
+This determines:
+Intensity
+Revision cycles
+When to switch to exam mode
+
+6. Subjects in Play 
+Base on the study materials the student provides/uploads
+
+7. How Strict You Want the Plan
+Choose one:
+Strict (military style)
+ → every hour planned, minimal flexibility
+Balanced (recommended)
+ → structured but adjustable
+Loose (freedom-based)
+ → guidelines, not rigid
+8.  Number of hours you want to study  per day (drop down list of 2hours - 14 hours)
+ 
+9. Number of weeks (1-15)
+
+WHAT TO SHOW ON THE CARDS OF THE PLAN
+Time (eg. 2hrs, 1:00pm-3:00pm)
+Topics or subtopics to study
+Include revision times (of topics & subtopics), quizzing my self(MCQs (more)/theory/case study) 

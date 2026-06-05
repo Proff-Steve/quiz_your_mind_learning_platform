@@ -1,0 +1,203 @@
+I need you to add a "Theory Exams" card under the "Start Learning" section of my web app. This feature allows users to upload study materials, configure exam settings, and have AI generate written-answer questions that are semantically scored against their study material.
+
+## Overview
+
+Users click "Theory Exams" → upload study material → configure settings → AI generates written questions → user takes exam with typed answers → reviews answers on summary page → submits for AI scoring → views score and detailed analysis with PDF download.
+
+## Core Workflow
+
+### Step 1: Upload & Configuration Page (Reuse existing upload page with modifications)
+
+When user clicks "Theory Exams", take them to the already existing upload page but ADD these configuration options:
+
+**Configuration Fields:**
+1. **Quiz Duration** - (user type/ selects preferred time)
+2. **Number of Questions** - Dropdown: 1 to 10 questions (max 10)
+3. **Difficulty Level** - Dropdown options:
+   - Easy
+   - Medium
+   - Hard
+   - Clinical Case
+   - Real Life Problem Based
+
+
+**Generate Button:** User clicks "Generate Questions" → AI processes the study material and generates written-answer questions based on the selected difficulty level and rules (see rules section below).
+
+### Step 2: Get Ready Page (Reuse existing)
+
+After AI generates questions, redirect to the already existing "Get Ready" page displaying:
+- Number of questions (user's selection)
+- Time limit (user's selected duration)
+- Difficulty level (selected)
+- Type: "Theory Exam - Written Answers"
+
+User clicks "Attempt Quiz Now" to proceed.
+
+### Step 3: Exams Area (Modified for Written Answers)
+
+**Display Format:**
+- Each question displayed with a numbered heading
+- Below each question: A TEXTAREA box (not multiple choice) where users type their answers
+- Timer at top counting down (user-selected duration)
+- Bottom buttons: "Pause" and "Submit"
+
+**Pause Button:**
+- When clicked, timer STOPS counting down
+- Button text changes to "Resume"
+- Questions and answers remain visible but input fields become read-only
+- Clicking "Resume" continues timer from where it stopped
+- User can pause multiple times
+
+**Submit Button:**
+- Takes user to "Summary of Attempt Page"
+- Timer continues counting down (does NOT stop)
+
+**Anti-Copy/Paste:**
+- Disable copy (Ctrl+C, right-click copy) on question text
+- Disable paste (Ctrl+V) in all answer textareas
+- Disable cut (Ctrl+X) on textareas
+
+### Step 4: Summary of Attempt Page
+
+**Layout:**
+- Timer continues counting down (visible at top)
+- Displays ALL questions in order
+- Below each question: Shows the user's typed answer (from previous page)
+- Users can read through all their answers
+
+**Bottom Buttons:**
+1. **"Go Back To Questions"** - Returns to Exams Area with all answers preserved, timer continues, user can edit answers
+2. **"Submit and Finish"** - Triggers AI scoring system (see scoring rules below)
+
+### Step 5: AI Scoring System
+
+When user clicks "Submit and Finish", the system:
+
+1. Sends to AI: (study material + questions + user's answers)
+2. AI compares the semantic meaning of each user answer to the correct answer in the study material
+3. Scoring logic:
+   - Each question = 5 marks maximum
+   - Full 5 marks = Answer meaning exactly matches or is semantically equivalent to correct answer
+   - Partial marks = Answer is partially correct, missing key points, or has minor inaccuracies (deduct 0.5 to 4.5 marks based on quality)
+   - 0 marks = Answer is completely wrong, off-topic, or empty
+
+4. Scoring criteria by answer quality:
+   - **Excellent (5/5)** - Complete, accurate, includes all key points
+   - **Good (4/5)** - Mostly correct, missing minor points
+   - **Satisfactory (3/5)** - Core idea correct but missing important details
+   - **Fair (2/5)** - Some relevant information but significant gaps
+   - **Poor (1/5)** - Minimal relevant content, mostly incorrect
+   - **Very Poor (0/5)** - Completely wrong or empty
+
+5. Calculate total score and percentage: (total_marks_earned / (total_questions * 5)) * 100
+
+### Step 6: Scoring Results Page
+
+After scoring, display:
+
+**Score Summary:**
+- Total Score: X/50 (or X/ [questions*5])
+- Percentage: XX%
+- Time taken
+- Message: "Pass" if >=60%, "Needs Improvement" if <60%
+
+**Bottom Button:** "Review Questions"
+
+### Step 7: Detailed Analysis Page
+
+When user clicks "Review Questions":
+
+**Display for each question:**
+1. Question text
+2. User's answer
+3. Correct answer (extracted from study material by AI)
+4. Mistakes/Improvements: AI-generated feedback on what was wrong or missing
+5. Marks earned for this question (X/5)
+
+**Include button:** "Download Analysis as PDF"
+- When clicked, generates PDF containing all questions, user answers, correct answers, mistakes, and marks
+- PDF styling: Clean, professional, includes user name, date, exam title
+
+## Difficulty Level Rules for AI Question Generation
+
+### Easy Mode
+Generate questions using these action verbs:
+- Define → Give the exact meaning
+- List → Mention points only
+- Describe → Explain in sequence or detail
+- Explain → Give reasons/mechanisms
+- Discuss → Give broad explanation with details, advantages, disadvantages, significance
+- Compare/Contrast → Show similarities and differences
+- Outline → Give summarized organized points
+- Enumerate → Mention items one after another
+- State
+- What is
+- Comment on
+- Show how
+- Explain why
+- How many
+
+### Medium Mode
+Use these rules randomly across questions:
+- Negative/Exception-Based (NOT, EXCEPT, LEAST, FALSE)
+- Absolute Terms (Always, Never, Only, Must)
+- Vague/Qualifier (Usually, Commonly, Rarely, May, Can be)
+- Comparative (More likely, Less likely, Most common)
+- Causation vs Association (Causes vs Is associated with)
+- Time/Sequence (Early vs Late, Acute vs Chronic)
+- Double Negatives (Not uncommon, Cannot be excluded)
+- Clinical Logic (Best next step, Most appropriate)
+- Numerical/Threshold (Above/Below, Elevated vs Severely elevated)
+- All/None patterns (All of the above, None of the above)
+- Partially True, Close Cousin, Opposite Pair, Cause vs Effect Reversal, Mechanism vs Outcome, Gold Standard vs Practical, Overgeneralization, Outdated, Irrelevant but Correct, Extreme Detail, Numerical Near-Miss, Sequence Mix-Up, Eponym Confusion, Population Mismatch, Risk Factor vs Cause, Exception within Exception, Language Framing, Diagnostic vs Therapeutic, Anchor Bias, Too Good to Be True, Single Wrong Word, Unit Trap, Directionality Error, Context Shift, Stage/Phase, Frequency Illusion, Similar Concept, Same Category Overload, Redundant Option, Hidden Clue, Misleading Keyword, Process/Sequence, Feature Swap, Look-Alike Data, Timing Error, Strength of Relationship, Priority/Order, Overlapping Concepts, Terminology Trap, Pattern Recognition
+
+Also include these question formats:
+- Classic Combination (Roman numerals I,II,III,IV with options like "I only", "II & III")
+- True/False for each statement (independent MTF)
+- Best Combination (K-type)
+- "Which of the following are correct?" (A–E list, pick combination)
+- "Select All That Apply" (SATA)
+- Assertion–Reason (A-R type)
+- Matching Type (EMQ – extended matching)
+- Multiple Completion
+- Ranking/Ordering
+- Matrix Questions
+- Cascading/Linked
+- Best Answer from Combinations
+- Negative Combination (EXCEPT within combination)
+- Confidence-Based MTF
+- Weighted Combination
+- Conditional Combination
+- Hierarchical Combination
+- Exception Within Combination
+- Scenario-Based Combination
+- Multi-Step Reasoning Combination
+- Data Interpretation Combination
+- Cross-Disciplinary Combination
+- Analogical Combination
+- Cause–Effect Combination
+- Completeness-Based Combination
+- Redundancy Detection
+- Contradiction-Based
+- Priority Ranking
+- Partial Credit Combination
+
+### Hard Mode
+Use same rules as Medium mode BUT make questions highly application-based, requiring synthesis of multiple concepts, critical thinking, and real-world application (not just recall).
+
+### Clinical Case Mode
+- Display ONE full clinical case scenario at the top of the page
+- All generated questions should relate to this case
+- Number of questions = user's selection (1-10)
+- Randomly incorporate some Medium mode rules into some questions
+- Questions should test: diagnosis, next steps, treatment plans, differentials, pathophysiology and explain why some steps were been taken
+
+### Real Life Problem Based Mode
+- Display ONE real-life problem-based scenario at the top (include environmental context, resources available, constraints)
+- All generated questions should relate to solving this problem
+- Number of questions = user's selection (1-10)
+- Randomly incorporate some Medium mode rules into some questions
+- Questions should test: problem-solving, resource allocation, decision-making, prioritization
+
+NOTE: Make sure to  implement this feature following existing patterns.
+

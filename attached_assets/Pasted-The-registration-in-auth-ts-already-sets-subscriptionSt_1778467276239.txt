@@ -1,0 +1,47 @@
+The registration in auth.ts already sets subscriptionStatus: "expired" and accountBalance: "0.00". Let me check the paystack routes and frontend registration page to find where trial amounts are still being deposited.
+
+
+3 actions
+Let me read the rest of paystack.ts to see the confirm-renewal route and check the frontend registration page.
+
+
+3 actions
+Now I have a clear picture. The seedPlanFields function deposits the full plan amount (GHS 12/48 or USD 4/15) as a virtual balance whenever a user pays. The user wants accountBalance to always be "0.00" — no virtual balance deposited at all, for both Ghana and non-Ghana users. The account just becomes active with correct plan dates.
+
+I'll update seedPlanFields to return "0.00" and clean up the now-redundant trial-skip logic in the scheduler.
+
+
+2 actions
+Now let me also clean up the now-redundant trial-skip logic in the daily deduction, since balance is always 0.00 after payment, Pass 2 will never find users to deduct anyway.
+
+
+2 actions
+Let me clean up the now-unused toDeduct query and unused imports.
+
+
+2 actions
+Now let me remove the dead toDeduct query and unused imports:
+
+
+2 actions
+Now remove the dead toDeduct query block:
+
+
+2 actions
+Now let me also remove the unused today variable in runDailyDeduction and do a final typecheck:
+
+
+2 actions
+The today variable is still used when expiring accounts (line 85), so it stays. Let me run a quick typecheck to confirm everything is clean:
+
+
+2 actions
+The typecheck errors are all pre-existing and unrelated to my change (they're in the card charge and share routes). My edit to balanceScheduler.ts is clean. Let me restart the API server to apply the change.
+
+
+2 actions
+Done. Here's what was changed:
+
+seedPlanFields now always returns accountBalance: "0.00" regardless of plan type or currency — no virtual balance is deposited when a user activates or renews (Ghana MoMo, non-Ghana card, or webhook renewal all set 0.00).
+Registration was already correct — account starts as expired with 0.00 balance and no plan dates.
+Daily scheduler — the balance deduction pass was removed entirely (it was only meaningful when balances were non-zero). Account expiry at plan end still runs normally.

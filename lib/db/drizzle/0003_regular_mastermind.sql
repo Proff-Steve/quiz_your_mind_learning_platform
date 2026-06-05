@@ -1,0 +1,1 @@
+ALTER TABLE "users" ADD COLUMN "pending_renewal_ref" varchar(100);

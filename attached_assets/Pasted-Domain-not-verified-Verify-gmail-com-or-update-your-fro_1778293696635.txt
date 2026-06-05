@@ -1,0 +1,13 @@
+Domain not verified: Verify gmail.com or update your from domain.
+Request body
+
+{
+  "from": "quizyourmind.business@
+",
+  "to": [
+    "mmoahstephen598@
+"
+  ],
+  "subject": "525688 — Your Quiz Your Mind verification code",
+  "html": "\n<!DOCTYPE html>\n<html lang=\"en\">\n<head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"></head>\n<body style=\"margin:0;padding:0;background:#f4f4f0;font-family:'Segoe UI',Arial,sans-serif\">\n  <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#f4f4f0;padding:40px 0\">\n    <tr><td align=\"center\">\n      <table width=\"520\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.08)\">\n        <tr>\n          <td style=\"background:#1a3a6b;padding:28px 36px;text-align:center\">\n            <span style=\"color:#ffffff;font-size:22px;font-weight:700;letter-spacing:0.5px\">Quiz Your Mind</span>\n          </td>\n        </tr>\n        <tr>\n          <td style=\"padding:36px 36px 20px\">\n            <h2 style=\"margin:0 0 12px;color:#1a2f4e;font-size:20px\">Verify your email address</h2>\n            <p style=\"margin:0 0 20px;color:#4a5568;font-size:15px;line-height:1.6\">\n              Hi <strong>Ben Nyarko</strong>, welcome to Quiz Your Mind!<br>\n              Use the code below to complete your registration. It expires in <strong>15 minutes</strong>.\n            </p>\n            <div style=\"background:#f0f4ff;border:2px dashed #1a3a6b;border-radius:10px;padding:22px;text-align:center;margin:24px 0\">\n              <span style=\"font-size:40px;font-weight:800;letter-spacing:14px;color:#1a3a6b;font-family:monospace\">525688</span>\n            </div>\n            <p style=\"margin:0;color:#718096;font-size:13px;line-height:1.6\">\n              If you didn't create an account, you can safely ignore this email.\n            </p>\n          </td>\n        </tr>\n        <tr>\n          <td style=\"background:#f8f9fa;padding:18px 36px;text-align:center;border-top:1px solid #e2e8f0\">\n            <span style=\"color:#a0aec0;font-size:12px\">&copy; 2026 Quiz Your Mind. All rights reserved.</span>\n          </td>\n        </tr>\n      </table>\n    </td></tr>\n  </table>\n</body>\n</html>"
+}

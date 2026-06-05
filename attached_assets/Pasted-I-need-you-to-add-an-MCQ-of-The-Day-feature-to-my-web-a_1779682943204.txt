@@ -1,0 +1,158 @@
+I need you to add an "MCQ of The Day" feature to my web app, placed under the same "Attempt Problem of The Day" section on the user dashboard (right next to or below the "Clinical Case of the Day" feature).
+
+**IMPORTANT:** This feature MUST include a leaderboard ("Show Results List") identical to the Clinical Case feature - delayed until 8:00 PM, showing all participants' names and scores sorted highest to lowest.
+
+## Overview
+Users click "MCQ of The Day" and see TWO card options:
+1. **Pre-Clinical Student Card**
+2. **Clinical Student Card**
+
+Each card represents a different daily MCQ set. Users can only choose ONE card per day (their first choice locks them out of the other card for that day).
+
+## Core Requirements
+
+### Daily MCQ Sets (Admin Side)
+- Admin can post TWO separate MCQ sets daily:
+  - **Pre-Clinical set**: 10 MCQs, 8 minutes time limit
+  - **Clinical set**: 10 MCQs, 8 minutes time limit
+- Each MCQ has: question text, 4 options (A, B, C, D), correct answer, rationale/explanation
+- Each set is assigned to a specific date
+- Admin can post one set, the other, or both for any given day
+
+### User Flow
+
+**Step 1: Card Selection**
+- User clicks "MCQ of The Day" from dashboard
+- Shows two cards: "Pre-Clinical Student" and "Clinical Student"
+- Each card displays:
+  - Title (Pre-Clinical or Clinical)
+  - "10 Questions" badge
+  - "8 minutes" badge  
+  - Difficulty level indicator
+- If user has already attempted one card today, that card is disabled/greyed out with "Completed" badge
+- If user hasn't attempted either, both are clickable
+
+**Step 2: Get Ready Page (REUSE EXISTING)**
+- After clicking a card, redirect to the already-implemented "Get Ready" page
+- Pass parameters: 10 questions, 8 minutes, difficulty (Pre-Clinical/Clinical), quiz type
+- User clicks "Attempt Quiz Now"
+
+**Step 3: Quiz Taking (REUSE EXISTING EXAMS AREA)**
+- Load the 10 MCQs for selected card
+- User answers, timer counts down (auto-submit at zero)
+
+**Step 4: Submission & Scoring**(REUSE EXISTING SCORE AREA)**
+- System scores (1 point per correct answer)
+- Show score immediately (X/10 and percentage)
+- Store attempt in database with timestamp
+
+**Step 5: Detailed Analysis Page (REUSE EXISTING)**
+- User clicks "Review Questions" to see each question, their answer, correct answer, and rationale
+
+**Step 6: Leaderboard / Show Results List (DELAYED UNTIL 8:00 PM)**
+- After submission, user sees a button called "Show Results List"
+- This button is DISABLED/GREYED OUT until 8:00 PM local time (20 hours after the MCQ set was posted at midnight)
+- At/after 8:00 PM, the button becomes clickable
+- When clicked, displays a modal or new page showing:
+  - **Separate leaderboards for Pre-Clinical and Clinical** (since they're different quizzes)
+  - OR a combined leaderboard with a filter/toggle to switch between Pre-Clinical and Clinical
+  - Each leaderboard shows: Rank, User Name, Score (percentage), Time taken (optional but nice)
+  - Sorted from highest score to lowest score
+  - If multiple users have same score, sort by time taken (faster is better) or submission time
+- This leaderboard is visible to ALL users after 8:00 PM
+- Users can see BOTH leaderboards (Pre-Clinical and Clinical) even if they only attempted one
+
+### Leaderboard Rules (Matches Clinical Case feature)
+- Only users who submitted BEFORE 8:00 PM are included in the leaderboard
+- Submissions after 8:00 PM are recorded but excluded from leaderboard (or marked as "late - not ranked")
+- Leaderboard reveals exactly at 8:00 PM (based on server time)
+- Users cannot see leaderboard results before 8:00 PM
+- The "Show Results List" button only becomes active at/after 8:00 PM
+
+### Database Tables Needed
+
+Add these tables (or integrate with existing structure):
+
+1. **daily_mcq_sets**: 
+   - id, date (date), type (pre_clinical or clinical), 
+   - time_limit_minutes (default 8), total_questions (default 10), 
+   - posted_at (datetime when it becomes available), 
+   - reveal_results_at (datetime = posted_at + 20 hours, which should be 8:00 PM),
+   - is_active (boolean)
+
+2. **daily_mcq_questions**:
+   - id, mcq_set_id (foreign key), question_text, option_a, option_b, 
+   - option_c, option_d, correct_answer (A/B/C/D), rationale
+
+3. **user_mcq_attempts**:
+   - id, user_id, mcq_set_id, answers_json, score (e.g., 7/10), 
+   - score_percentage (e.g., 70), time_taken_seconds (optional), 
+   - started_at, submitted_at, is_locked (boolean), 
+   - included_in_leaderboard (boolean - true if submitted before reveal_results_at)
+
+### Business Rules
+- A user can attempt ONLY ONE MCQ set per day (either Pre-Clinical OR Clinical, not both)
+- Once user selects a card and starts, they cannot switch to the other card for that day
+- Timer expires → auto-submit whatever answers are selected
+- No changing answers after submission
+- Leaderboard only includes users who submitted before 8:00 PM
+- Users who submit after 8:00 PM see a message: "Submitted after deadline - not included in today's leaderboard"
+
+### API Endpoints Needed
+
+- GET /api/mcq/today/cards - returns availability for both card types and leaderboard unlock status (whether 8:00 PM has passed)
+- GET /api/mcq/today/:type - returns the 10 questions for that type (without correct answers)
+- POST /api/mcq/submit - accepts answers, calculates score, stores attempt, returns score + correct answers + rationale + leaderboard unlock time
+- GET /api/mcq/analysis/:attemptId - returns detailed analysis
+- GET /api/mcq/leaderboard/:setId - returns leaderboard for specific MCQ set (ONLY if current time >= reveal_results_at)
+- GET /api/mcq/today/leaderboards - returns both Pre-Clinical and Clinical leaderboards for today (with time check)
+
+### Frontend Components to Build
+
+1. **Card Selection Component** - Two cards showing Pre-Clinical and Clinical options
+2. **Results Component** - Shows user's score after submission WITH "Show Results List" button (disabled until 8:00 PM)
+3. **Leaderboard Modal/Page** - Shows leaderboard(s) with ability to toggle between Pre-Clinical and Clinical
+4. **Dashboard Integration** - Add "MCQ of The Day" entry point showing status (Available/Completed/Leaderboard Available)
+
+### Integration with Existing Code
+
+**Reuse Existing:**
+- Get Ready page (accept dynamic props)
+- Exams Area (load MCQ sets dynamically)
+- Analysis Page (display MCQ review)
+- Timer functionality (already exists)
+
+**Important:** Do NOT rebuild quiz-taking engine. Integrate with what exists.
+
+### Leaderboard UI Requirements
+
+**Before 8:00 PM:**
+- "Show Results List" button is greyed out with tooltip: "Results available at 8:00 PM"
+- No leaderboard data accessible
+
+**After 8:00 PM:**
+- Button becomes active (green/blue)
+- Clicking opens leaderboard showing:
+  - Header: "Pre-Clinical Leaderboard" and "Clinical Leaderboard" with tabs/buttons to switch
+  - Table columns: Rank (🥇🥈🥉), Name, Score (%), Time Taken (optional)
+  - Highlight current user's row (if they attempted)
+  - Show message if no participants: "No submissions yet for this category"
+  - Timestamp: "Results as of 8:00 PM"
+
+### Timezone Handling
+- Match Clinical Case feature exactly
+- Posted at 12:00 AM local → reveal at 8:00 PM local
+- Store UTC, display in user's timezone
+- Show countdown timer to leaderboard reveal: "Leaderboard available in 3h 24m"
+
+### Admin Panel Requirements
+- Form to create Pre-Clinical set for specific date
+- Form to create Clinical set for specific date
+- Preview questions
+- Edit/delete sets
+- View leaderboard for any past date (admin only)
+
+### Error Handling
+- Show "No quiz available today for this track" if admin hasn't posted
+- "You already attempted the other track today" if trying to switch
+- "Leaderboard not yet available" if trying to access early

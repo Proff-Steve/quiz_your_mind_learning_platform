@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Learning Platform"
+version = "1.0.0"
+id = "artifacts/learning-platform"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19688
+
+[services.development]
+run = "pnpm --filter @workspace/learning-platform run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/learning-platform", "run", "build" ]
+publicDir = "artifacts/learning-platform/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19688"
+BASE_PATH = "/"
